@@ -1,0 +1,26 @@
+00-04-20
+  architectura sh
+00-04-15
+  kernel linkowany do postaci pliku elf. W przypadku innego rodzaju pliku
+  wykonywalnego nalezy dodac OUT_KLUDGE
+00-04-03
+zaimplementowana obsluga semaforów. 
+
+Do zrobienia:
+- zagniezdzanie przerwan.
+- zmienic tablice gdt na stala
+- zmiana funkcji udiv3-potrzebna do dzielenia 64 bitowego
+- zaimplementowac itoa
+
+
+00-03-00:
++ WaitQueue jest lista skrzynek przy ktorych czekaja zadania, a nie jak dotad lista zadan
++ przy jednej skrzynce moze oczekiwac wiecej zadan.
++ zmiana sposobu wlaczania i wylaczania przerwan
+
+26-11-04
+Zmiana struktury plikow naglowkowych pod katem innych architektur. 
+Blad w lb_list.c - nieprawidlowy typ pola prior - poprawiony.
+Zmienne inicjowane zmienione na stale.
+
+

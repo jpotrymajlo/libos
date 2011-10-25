@@ -1,0 +1,109 @@
+/**
+\mainpage LibOS
+\author Jacek Potrymajlo jacek.potrymajlo@wp.pl
+
+\section wstep Wstep
+LibOS jest systemem operacyjnym czasu rzeczywistego pozwalaj¹cym na wykonywanie wielow¹tkowych
+programów w œrodowisku jednoprocesorowym. Jest to biblioteka ³¹czona z aplikacj¹ u¿ytkownika
+umo¿liwiaj¹ca operacje na zadaniach (tworzenie, usypianie i pobudzanie) oraz komunikacjê miêdzy zadaniami
+(wysy³anie i odbieranie komunikatów). Zadania s¹ kolejkowane wed³ug ich priorytetów.
+W danej chwili procesor zawsze wykonuje zadanie o najwy¿szym priorytecie.
+Jezeli w systemie znajduja sie zadania o tym samym priorytecie szeregowane sa wed³ug
+strategii round robing.
+\section narzedzia Narzedzia
+System wraz z przyk³adow¹ aplikacja zbudowany zosta³ przy uzyciu narzedzi GNU. Kompilatora gcc, asemblera as i
+linkera ld.
+\section przyklad Przyklad programu
+Poni¿ej przedstawiona zosta³a przyk³adowa wymiana komunikatów:
+\code
+
+static msg_t MsgTask1;
+static msg_t MsgTask2;
+
+static void Task1Init(void)
+{
+	MsgTask1.dwMsgType = 1;
+	MsgTask1.pHome = &ExTask1;
+	MsgTask1.pResp = &ExTask1;
+    msg_send_msg(&ExTask1,&MsgTask1);
+}
+void Task1(void)
+{
+    msg_t* msg;
+    Task1Init();
+    do{
+        msg = msg_receive_msg(&ExTask1,WAIT_FOREVER);
+        if (msg){
+            msg_send_msg(&ExTask3,msg);
+        }
+        tsk_sleep(10);
+    }while(1);
+}
+static void Task2Init(void)
+{
+	MsgTask2.dwMsgType = 2;
+	MsgTask2.pHome = &ExTask2;
+	MsgTask2.pResp = &ExTask2;
+    msg_send_msg(&ExTask2,&MsgTask2);
+}
+
+void Task2(void)
+{
+    msg_t* msg;
+    Task2Init();
+    do{
+        msg = msg_receive_msg(&ExTask2,WAIT_FOREVER);
+        if (msg){
+            msg_send_msg(&ExTask3,msg);
+        }
+        tsk_sleep(50);
+    }while(1);
+}
+static void Task3Init(void)
+{
+
+}
+void Task3(void)
+{
+    msg_t* msg;
+    Task3Init();
+    do{
+        msg=msg_receive_msg(&ExTask3,WAIT_FOREVER);
+        if (msg){
+             switch(msg->dwMsgType){
+             case 1:
+                 break;
+             case 2:
+                 break;
+             default:
+                 break;
+             }
+             msg_send_msg(msg->pResp,msg);
+        }
+    }while(1);
+
+}
+void Task4(void)
+{
+    do{
+        tsk_sleep(4);
+    }while(1);
+}
+\endcode
+
+*/
+
+/**
+ * \defgroup libc Biblioteka standardowa
+ * @{
+ *  Implementacja biblioteki standardowej
+ */
+
+ /** @} */
+
+ /**
+ * \defgroup Typy Definicje typow
+ * @{
+ */
+
+/** @} */

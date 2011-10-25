@@ -1,0 +1,18 @@
+
+#narzedzia
+export GCC=    sh4-linux-gcc
+export AS =    sh4-linux-as
+export AR=     sh4-linux-ar
+export LD=     sh4-linux-ld
+export OBJCOPY=sh4-linux-objcopy
+export OBJDUMP=sh4-linux-objdump
+export STRIP=  sh4-linux-strip
+
+#opcje narzedzi
+LDSCRIPT = hal/$(CPU)/$(BOARD)/scripts/ldscript
+export CC_FLAGS = -m4-nofpu -Wall -O2 -W -nostdinc -fno-builtin -D$(CPU)_$(BOARD)
+export AS_FLAGS = -felf32-little  -i.
+export AR_FLAGS =  rcs
+LD_FLAGS = -T $(LDSCRIPT) -Map $(TARGET_FILE).map -nostdlib
+OBJCOPY_FLAGS =  -Ielf32-little -Obinary
+OBJDUMP_FLAGS = --syms --disassemble-all

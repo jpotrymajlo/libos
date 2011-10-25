@@ -1,0 +1,66 @@
+         TABELA KONWERSJI do SLIM.AWK (patrz uwagi na ko/ncu pliku)
+
+ /  Latin-2 ISO-8859-2 Mazovia Windows CSK DHN EC Apple belkot TeX-ohida
+ 1     2        3         4       5     6   7   8   9     10      11
+
+/a     ¥        ±         †       ¹         ‰   ¡   ˆ      a     \c{a}
+/c     †        æ                æ     ¡   Š   ¢         c     \'c
+/e     ©        ê         ‘       ê     ¢   ‹   ¦   «      e     \c{e}
+/l     ˆ        ³         ’       ³     £   Œ   ª   ¸      l     \l{}
+/n     ä        ñ         ¤       ñ     ¤      «   Ä      n     \'n
+/o     ¢        ó         ¢       ó     ¥   Ž   ó   —      o     \'o
+/s     ˜        ¶         ž       œ     ¦      ±   æ      s     \'s
+/x     «        ¼         ¦       Ÿ     ¨   ‘   ¹         z     \'z
+/z     ¾        ¿         §       ¿     §      »   ý      z     \.z
+/A     ¤        ¡                ¥     €   €      „      A     \c{A}
+/C             Æ         •       Æ           ‚   ¢      C     \'C
+/E     ¨        Ê                Ê     ‚   ‚   †   Œ      E     \c{E}
+/L             £         œ       £     ƒ   ƒ   Š   ü      L     \L{}
+/N     ã        Ñ         ¥       Ñ     „   „   ‹   Á      N     \'N
+/O     à        Ó         £       Ó     …   …   Ó   î      O     \'O
+/S     —        ¦         ˜       Œ     †   †   ‘   å      S     \'S
+/X             ¬                      ˆ   ˆ   ™         Z     \'Z
+/Z     ½        ¯         ¡       ¯     ‡   ‡   ›   û      Z     \.Z
+
+ UWAGI: 
+ Rubryka 1 (/):
+   Notacja ,,ciachowa'' jest stosowana w MeX-u (polskiej adaptacji
+   TeX-owego formatu plain).
+ Rubryka 5 (Windows -- CP1250):
+   Kodowanie to jest stosowane np. przez Word-a 6.0 (wersja polska,
+   Windows niepolskie, nasze komputery) przy eksporcie do ASCII
+   z zachowaniem uk/ladu strony, a tak/ze przy imporcie z opcj/a
+   ,,plik tekstowy''; przy imporcie z opcj/a ,,plik tekstowy ASCII''
+   nale/zy u/zy/c kodowania Latin 2; import z opcjami ,,plik tekstowy
+   z uk/ladem strony'' oraz ,,plik tekstowy ASCII z uk/ladem strony''
+   wymaga jeszcze innego kodowania...
+ Rubryka 8 (EC -- Cork Encoding):
+   Konwersja ta mo/ze by/c przydatna do uczytelniania plik/ow tworzonych
+   przez DVITYPE (program nale/z/acy do standardowej dystrybucji TeX-a
+   autorstwa D. E. Knutha), gdy/z w plikach DVI polskie znaki znajduj/a
+   si/e pod ,,wewn/etrznymi'' kodami TeX-owymi. Je/zeli stosowany jest
+   uk/lad PL lub EC, to taki w/la/snie spos/ob kodowania wyst/epuje
+   w pliku DVI, a tym samym w plikach tworzonych przez DVITYPE;
+   niestety, nie ka/zda implementacja programu DVITYPE wysy/la explicite
+   znaki o kodach > 127, np. wersja z pakietu emTeX tego nie robi, a szkoda.
+ Rubryka 9 (Apple Macintosh):
+   Nie wiemy, czy na ka/zdym Macintoshu taki uk/lad jest stosowany,
+   ale do tej pory nie trafili/smy na inny.
+ Rubryka 10 (belkot):
+   Nie nale/zy tego kodowania u/zywa/c jako /xr/od/lowego!!!
+   Stosowane bywa ono do potrzeb poczty elektronicznej, co te/z
+   nie wydaje si/e godne polecenia.
+ Rubryka 11 (TeX-ohida):
+   Nazw/e tego spos/obu reprezentowania polskich liter -- niezwykle adekwatn/a
+   -- zaczerpn/eli/smy od Jaros/lawa Strza/lkowskiego z Krakowa (tw/orcy
+   programu PLCONV, ftp://ftp.phys.uni.torun.pl/pub/plconv.[c,DOS exe]).
+   Nie wiedzie/c czemu spos/ob ten jest wci/a/z jeszcze /zywy w/sr/od braci
+   TeX-owej. Tutaj zosta/l umieszczony JEDYNIE jako przyk/lad reprezentacji
+   wieloznakowej. Je/sli ju/z, to lepiej by/loby zamieni/c \c{a} \c{e}
+   \c{A} \c{E} odpowiednio na \k{a} \k{e} \k{A} \k{E}, co jest konwencj/a
+   stosowan/a w pakiecie Babel (gdzie jeszcze?).
+ Rubryka 12 i nast. (???):
+   W razie razie gwa/ltownej potrzeby mo/zna dopisa/c dodatkowe
+   kolumny w tabeli i ciutk/e zmieni/c klauzul/e BEGIN w SLIM.AWK.
+
+ Poniedzia’ek, 12 lutego 1996 r., wersja 0.55

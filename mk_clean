@@ -1,0 +1,2 @@
+#make CPU=I386 BOARD=PC clean
+make CPU=ARM BOARD=twarm clean

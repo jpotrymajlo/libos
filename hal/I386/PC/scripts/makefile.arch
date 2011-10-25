@@ -1,0 +1,18 @@
+
+#narzedzia
+export GCC=gcc
+export AS=gcc
+export AR=ar
+export LD=ld
+export OBJCOPY=objcopy
+export OBJDUMP=objdump
+export STRIP=strip
+
+#opcje narzedzi
+LDSCRIPT = hal/$(CPU)/$(BOARD)/scripts/ldscript
+export CC_FLAGS = -Wall -O2 -W -nostdinc -fno-builtin -D$(CPU)_$(BOARD)
+export AS_FLAGS = -i.
+export AR_FLAGS =  rcs
+LD_FLAGS = -T $(LDSCRIPT) -Map $(TARGET_FILE).map -nostdlib
+OBJCOPY_FLAGS =  -Ielf32-i386 -Obinary
+OBJDUMP_FLAGS = --syms --disassemble-all

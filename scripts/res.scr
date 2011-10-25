@@ -1,0 +1,105 @@
+
+BEGIN{
+
+    FS = "[ \t,()]+"
+    liczba_zadan=0;
+    liczba_skrzynek=0;
+	liczba_semaforow=0;
+}
+
+/ *DEF_TASK.*/ {
+    liczba_zadan++
+    deklaracje_zadan[liczba_zadan] = sprintf("extern void %s(void);",$2);
+    inicjowanie_zadan[liczba_zadan]= sprintf("    tsk_create_task(%s,&%sStack[%s],\"%s\",%s,%s);",$2,$2,$3,$4,$5,$6);
+    definicje_stosow[liczba_zadan] = sprintf("UBYTE %sStack[%s];",$2,$3);
+}
+
+/ *DEF_EXCH.*/ {
+    liczba_skrzynek++;
+    deklaracje_skrzynek[liczba_skrzynek]= sprintf("extern exchange_t %s;",$2);
+    definicje_skrzynek[liczba_skrzynek]= sprintf("exchange_t %s;",$2);
+    inicjowanie_skrzynek[liczba_skrzynek]= sprintf("    msg_create_mailbox(&%s);",$2);
+}
+
+/ *DEF_SEM.*/ {
+    liczba_semaforow++;
+	deklaracje_semaforow[liczba_semaforow]=sprintf("extern sem_t %s;",$2);
+	definicje_semaforow[liczba_semaforow]=sprintf("sem_t %s;",$2);
+	inicjowanie_semaforow[liczba_semaforow]=sprintf("    sem_create(&%s,%s);",$2,$3);
+}     
+
+
+END{
+    print "#include <libos.h>"              >  RESOURCE_SRC
+	print ""                                >> RESOURCE_SRC
+    print "char OsVersion[]=\"0.4.8\";"     >> RESOURCE_SRC
+	print ""                                >> RESOURCE_SRC
+	print "tsk_dscr_t  TskArray[NUMBER_OF_TASKS];">>RESOURCE_SRC
+	print ""                                >> RESOURCE_SRC
+    for (i=1;i<=liczba_zadan;i++)           
+	{
+         print deklaracje_zadan[i]          >> RESOURCE_SRC
+	}
+    print ""                                >> RESOURCE_SRC
+    for (i=1;i<=liczba_zadan;i++)
+	{
+         print definicje_stosow[i]          >> RESOURCE_SRC
+	}
+    print ""                                >> RESOURCE_SRC
+    for (i=1;i<=liczba_skrzynek;i++)
+	{
+         print definicje_skrzynek[i]        >> RESOURCE_SRC
+	}
+    print ""                                >> RESOURCE_SRC
+    for (i=1;i<=liczba_semaforow;i++)
+	{
+         print definicje_semaforow[i]        >> RESOURCE_SRC
+	}
+
+    print ""                                >> RESOURCE_SRC
+    print "int start(void)"                 >> RESOURCE_SRC
+    print "{"                               >> RESOURCE_SRC
+    print "    lb_os_init();"               >> RESOURCE_SRC
+
+    for (i=1;i<=liczba_zadan;i++)
+	{
+         print inicjowanie_zadan[i]         >> RESOURCE_SRC
+	}
+    print ""                                >> RESOURCE_SRC
+    for (i=1;i<=liczba_skrzynek;i++)
+	{
+         print inicjowanie_skrzynek[i]      >> RESOURCE_SRC
+	}
+    print ""                                >> RESOURCE_SRC
+    for (i=1;i<=liczba_semaforow;i++)
+	{
+         print inicjowanie_semaforow[i]      >> RESOURCE_SRC
+	}
+    print ""                                >> RESOURCE_SRC
+    print "    os_start();"              >> RESOURCE_SRC
+    print ""                                >> RESOURCE_SRC
+    print "    return 0;"                   >> RESOURCE_SRC
+    print "}"                               >> RESOURCE_SRC
+
+    print "#ifndef _RESOURCES_H_"                 >  RESOURCE_H
+    print "#define _RESOURCES_H_"                 >  RESOURCE_H
+    print "#include <libos.h>"                    >> RESOURCE_H
+    print ""                                      >> RESOURCE_H
+    print "#define NUMBER_OF_TASKS ",liczba_zadan >> RESOURCE_H
+    print ""                                      >> RESOURCE_H
+
+    for (i=1;i<=liczba_skrzynek;i++)
+	{
+         print deklaracje_skrzynek[i]             >> RESOURCE_H
+	}
+    print ""                                      >> RESOURCE_H
+    for (i=1;i<=liczba_semaforow;i++)
+	{
+         print deklaracje_semaforow[i]             >> RESOURCE_H
+	}
+    print ""                                      >> RESOURCE_H
+
+    print "#endif"                                >> RESOURCE_H
+
+
+}

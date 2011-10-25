@@ -1,0 +1,8 @@
+Warning: The selected output language "polish" has not been updated
+since release 1.2.17.  As a result some sentences may appear in English.
+
+Notice: Output directory `../libosdoc' does not exist. I have created it for you.
+/cygdrive/d/Jacek/projekty/libos/src/00-03-19/include/arch/i386_pc/arch.h:10: Warning: Compound lb_registers is not documented.
+/cygdrive/d/Jacek/projekty/libos/src/00-03-19/include/libos.h:93: Warning: Compound msg_in_t is not documented.
+/cygdrive/d/Jacek/projekty/libos/src/00-03-19/include/arch/i386_pc/arch.h:42: Warning: Compound lb_int_gate is not documented.
+/cygdrive/d/Jacek/projekty/libos/src/00-03-19/include/libos.h:83: Warning: Compound msg_out_t is not documented.

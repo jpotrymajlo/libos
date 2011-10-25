@@ -1,0 +1,2 @@
+make CPU=ARM BOARD=twarm build
+#make CPU=I386 BOARD=PC build

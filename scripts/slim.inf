@@ -1,0 +1,98 @@
+CO:
+SLIM jest AWK-owym przekodownikiem pomi/edzy r/o/znymi systemami
+reprezentowania polskich liter. Nie jest to przekodownik zbyt odporny na
+nieprawid/lowe u/zytkowanie, ale za to jest stosunkowo prosty i uniwersalny
+(/latwo rekonfigurowalny). Ponadto -- dzi/eki zastosowaniu AWK-a -- powinien
+okaza/c si/e /latwo przeno/sny.
+
+Niniejszy plik opisuje wersj/e DOS-ow/a.
+
+KTO:
+Bogus/law Jackowski i Piotr Pianowski z wydatn/a pomoc/a Staszka Wawrykiewicza
+BOP s.c., 80-363 Gda/nsk, ul. Piastowska 70, tel. (058) 53-46-59
+staszek@ipipan.gda.pl
+
+KIEDY:
+Sobota, 10 lutego 1996 r., wersja 0.5
+Poniedzia/lek, 12 lutego 1996 r., wersja 0.55
+    * g/lupi b/l/ad wyeliminowany (przeoczenie sk/adin/ad /swietnie znanej
+      sytuacji: jak si/e wykonuje globalne zamiany w napisie, to mo/ze si/e
+      zdarzy/c, /ze ,,/a'' si/e zamieni na ,,/c'', a chwil/e potem ,,/c''
+      zamieni si/e na ,,/X'' -- por. zamiana Latin 2 --> Mazovia)
+    * poprawiona konwersja z notacji ciachowej
+    * ciach poprzedzony w-ty/l-ciachem (\/) nie jest podwajany przy konwersji
+      z notacji ciachowej do innej (uk/lon w stron/e TeX-owc/ow, jak komu/s
+      to nie odpowiada, to mo/ze bez trudu zmieni/c po swojemu SLIM.AWK)
+    * do/lo/zona tabela konwersji dla polskich znak/ow tzw. encodingu EC, tj.
+      TeX-owego uk/ladu znak/ow w fontach PL pakietu MeX oraz w fontach DC/EC
+      (p. uwagi w pliku SLIM.TBL)
+    * do/lo/zona tabela konwersji dla Apple Macintosha
+    * do/lo/zona tabela konwersji dla reprezentacji TeX-ohida (p. uwagi
+      w pliku SLIM.TBL)
+
+JAK:
+SLIM wykorzystuje
+  1. DOS-owy (na razie) plik wsadowy SLIM.BAT
+kt/ory wykorzystuje
+  2. program GAWK.EXE (Gnu AWK w. 3.0, mo/ze by/c GAWK-EMX -- lepszy bo
+                       szybszy, ale niestety nie mo/ze by/c bardzo szybki
+                       MAWK, bo obecna wersja SLIM.AWK wykorzystuje
+                       znak o kodzie 0 jako znak pomocniczy, o kt¢rym
+                       zakíadamy, ße nie powinien pojawiç sië w pliku
+                       tekstowym, a MAWK 1.2.2 jakoû sobie z tym znakiem
+                       nie radzi)
+  3. program SLIM.AWK
+  4. tabel/e SLIM.TBL
+
+  SLIM.AWK i SLIM.TBL deklarowane w skrypcie wsadowym nale/zy poprzedzi/c
+  /scie/zk/a dost/epu, np. -fc:/dat/slim.awk -vTBL=c:/dat/slim.tbl
+
+W chwili obecnej obs/lugiwane s/a nast/epuj/ace systemy: notacja
+,,ciachowa'', CP852 (Latin 2), ISO-8859-2 (ISO Latin2), Mazovia, CP1250
+(Windows), CSK, DHN, EC (Cork Encoding), Macintosh oraz ,,belkot'' -- patrz
+plik SLIM.TBL.
+
+Aby przekodowa/c plik o nazwie, dajmy na to, BZDU na plik UBZD, wystarczy
+polecenie DOS-owe:
+
+   slim <znak okre/sl. kod /xr/od/la> <znak okre/sl. kod wyniku> bzdu ubzd
+
+Nast/epuj/ace znaki s/a rozpoznawane przez program SLIM.AWK:
+
+ s S / notacja ciachowa (,,slaszowa'')
+ l L   Latin 2 (CP852)
+ i I   ISO-8859-2 (ISO Latin2)
+ m M   Mazovia
+ w W   Windows (CP1250)
+ c C   CSK
+ d D   DHN
+ e E   EC (Cork Encoding)
+ a A   Apple Macintosh
+ b B   belkot
+ o O   TeX-ohida
+
+Przyk/ladowo, je/sli BZDU jest zapisane w notacji ciachowej, to polecenia
+
+   slim / l bzdu ubzd
+oraz
+   slim / L bzdu ubzd
+oraz
+   slim s l bzdu ubzd
+oraz
+   slim s L bzdu ubzd
+oraz
+   slim S l bzdu ubzd
+oraz
+   slim S L bzdu ubzd
+
+spowoduj/a powstanie pliku UBZD zakodowanego za pomoc/a systemu Latin 2
+(CP852).
+
+ZA ILE:
+Na niniejszy produkcik autorzy nie nak/ladaj/a /zadnych ogranicze/n
+kopyrajtowych, ale nie poczuwaj/a si/e te/z do przesadnej odpowiedzialno/sci
+za jego rozwijanie i piel/egnowanie. Tym niemniej wszelkie uwagi i komentarze
+na temat ewentualnych b/led/ow lub mo/zliwych poprawek s/a mile widziane.
+Nasz Super Weryfikator (SW) na pewno si/e ucieszy z przeniesienia tej
+maszynki na inne platformy...
+

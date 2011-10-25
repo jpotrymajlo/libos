@@ -1,0 +1,28 @@
+OUTPUT_FORMAT("elf32-i386")
+ENTRY(entry)
+START_ADDR = 0x100000;
+SECTIONS
+{
+    .text START_ADDR : AT(START_ADDR)
+    {
+	code = .; _code = .; __code = .;
+	*(.text)
+	*(.rodata*)
+	. = ALIGN(4096);
+    }
+    .data : AT(START_ADDR + (data - code))
+    {
+	data = .; _data = .; __data = .;
+	*(.data)
+	. = ALIGN(4096);
+    }
+    .bss : AT(START_ADDR + (bss - code))
+    {
+/* kernel BSS */
+	bss = .; _bss = .; __bss = .;
+	*(.bss)
+	*(COMMON) /* GNU C "common" variables */
+	. = ALIGN(4096);
+    }
+    end = .; _end = .; __end = .;
+}
